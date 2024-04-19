@@ -1,10 +1,8 @@
 package com.contxt.kinesis
 
-import java.time.ZonedDateTime
-
-import akka.Done
-import akka.stream.scaladsl.SourceQueueWithComplete
-import akka.stream.{KillSwitch, QueueOfferResult}
+import org.apache.pekko.Done
+import org.apache.pekko.stream.scaladsl.SourceQueueWithComplete
+import org.apache.pekko.stream.{KillSwitch, QueueOfferResult}
 import org.slf4j.LoggerFactory
 import software.amazon.kinesis.exceptions.{KinesisClientLibDependencyException, ShutdownException, ThrottlingException}
 import software.amazon.kinesis.lifecycle.events._
@@ -12,6 +10,7 @@ import software.amazon.kinesis.lifecycle.{ShutdownInput, ShutdownReason}
 import software.amazon.kinesis.processor.{RecordProcessorCheckpointer, ShardRecordProcessor}
 import software.amazon.kinesis.retrieval.kpl.ExtendedSequenceNumber
 
+import java.time.ZonedDateTime
 import scala.collection.immutable.Queue
 import scala.concurrent.duration._
 import scala.concurrent.{Await, ExecutionContext, Future}
