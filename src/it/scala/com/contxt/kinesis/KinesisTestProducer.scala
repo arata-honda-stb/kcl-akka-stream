@@ -1,11 +1,10 @@
 package com.contxt.kinesis
 
-import java.nio.ByteBuffer
-
-import akka.NotUsed
-import akka.stream.scaladsl._
 import com.amazonaws.services.kinesis.producer.{KinesisProducerConfiguration, UserRecordResult}
+import org.apache.pekko.NotUsed
+import org.apache.pekko.stream.scaladsl._
 
+import java.nio.ByteBuffer
 import scala.concurrent.Future
 import scala.language.implicitConversions
 

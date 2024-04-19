@@ -7,22 +7,21 @@ and re-sharding capabilities.
 
 This library is thoroughly tested and currently used in production.
 
-
 ## Installation
 
 ```
 libraryDependencies += "io.github.streetcontxt" %% "kcl-akka-stream" % "5.0.0"
 ```
 
-
 ## Usage
 
 Here are two simple examples on how to initialize the Kinesis consumer and listen for string messages.
 
 The first example shows how to process Kinesis records in at-least-once fashion:
+
 ```scala
-import akka.actor.ActorSystem
-import akka.stream.scaladsl.Sink
+import org.apache.pekko.actor.ActorSystem
+import org.apache.pekko.stream.scaladsl.Sink
 import com.contxt.kinesis.{ConsumerConfig, KinesisSource}
 
 import scala.concurrent.Await
@@ -59,9 +58,10 @@ object Main {
 ```
 
 The second examples shows how to implement no-guarantees processing:
+
 ```scala
-import akka.actor.ActorSystem
-import akka.stream.scaladsl.Sink
+import org.apache.pekko.actor.ActorSystem
+import org.apache.pekko.stream.scaladsl.Sink
 import com.contxt.kinesis.{ConsumerConfig, KinesisSource}
 
 import scala.concurrent.Await
@@ -108,7 +108,9 @@ after failing to process a record, and not marking it as processed, then no furt
 eventually causing the system to run out of memory.
 
 ## Consumer Configuration
+
 The Kinesis Consumer `ConsumerConfig` can be configured via HOCON configuration, which is common for Akka projects
+
 ```hocon
 com.contxt.kinesis {
   consumer {
@@ -136,22 +138,24 @@ com.contxt.kinesis {
 ```
 
 Then configure the consumer using the convenience method `ConsumerConfig.fromConfig`.
+
 ```scala
 ConsumerConfig.fromConfig(system.settings.config.getConfig("com.contxt.kinesis.consumer"))
 ```
 
-The `ConsumerConfig` class also has methods for accepting raw AWS SDK clients which can be configured. 
+The `ConsumerConfig` class also has methods for accepting raw AWS SDK clients which can be configured.
 If you require very custom configuration, this option is available.
 
 ## Amazon Licensing Restrictions
+
 **KCL license is not compatible with open source licenses!** See
 [this discussion](https://issues.apache.org/jira/browse/LEGAL-198) for more details.
 
 As such, the licensing terms of this library is Apache 2 license **PLUS** whatever restrictions
 are imposed by the KCL license.
 
-
 ## No Message Ordering
+
 Kinesis consumer **does not guarantee mutually exclusive processing of shards** during failover or load-balancing.
 See [Kinesis Troubleshooting Guide](http://docs.aws.amazon.com/streams/latest/dev/troubleshooting-consumers.html)
 for more details.
@@ -159,9 +163,10 @@ for more details.
 Kinesis producer library **does not provide message ordering guarantees** at a reasonable throughput,
 see [this ticket](https://github.com/awslabs/amazon-kinesis-producer/issues/23) for more details.
 
-
 ## Integration Tests
+
 To run integration tests:
+
 * Setup local AWS credentials (for example, via `~/.aws/credentials` file)
 * Set `KINESIS_TEST_REGION` environmental variable
 * Run `sbt it:test`
